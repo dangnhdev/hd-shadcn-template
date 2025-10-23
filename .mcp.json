@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mcphub": {
+      "type": "http",
+      "url": "http://localhost:3000/mcp/f82935c9-75c4-4c07-bbe1-18d5e1b59531"
+    }
+  }
+}
