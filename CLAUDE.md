@@ -3,7 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 **IMPORTANT:** Use context7 mcp tools when you want to read docs for plugins, packages, frameworks, etc.
-**IMPORTANT:** Use mui mcp tools when you want to read docs about MUI components.
+**IMPORTANT:** This project use **bun** as package manager
 
 ## Role & Responsibilities
 
