@@ -1,60 +1,34 @@
-# Shadcn Admin Dashboard
+# Shadcn Starter Template
 
-Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
-
-![alt text](public/images/shadcn-admin.png)
-
-I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
-
-> This is not a starter project (template) though. I'll probably make one in the future.
+A clean, minimal starter template built with Shadcn UI and Vite. Ready for Better Auth + Convex integration.
 
 ## Features
 
-- Light/dark mode
-- Responsive
-- Accessible
-- With built-in Sidebar component
-- Global search command
-- 10+ pages
-- Extra custom components
-- RTL support
+- ✅ Light/dark mode
+- ✅ Responsive design
+- ✅ Accessible components
+- ✅ Built-in Sidebar component
+- ✅ Global search command
+- ✅ Error pages (401, 403, 404, 500, 503)
+- ✅ Settings pages
+- ✅ Clean architecture
+- 🚀 Ready for Better Auth + Convex
 
-<details>
-<summary>Customized Components (click to expand)</summary>
+## Cleaned Up
 
-This project uses Shadcn UI components, but some have been slightly modified for better RTL (Right-to-Left) support and other improvements. These customized components differ from the original Shadcn UI versions.
+This template has been cleaned from:
+- ❌ Clerk authentication (removed)
+- ❌ RTL (Right-to-Left) support (removed)
+- ❌ Team/Workspace switcher (removed)
+- ❌ Demo pages (Tasks, Apps, Chats, Users - removed)
 
-If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest add <component>`), it's generally safe for non-customized components. For the listed customized ones, you may need to manually merge changes to preserve the project's modifications and avoid overwriting RTL support or other updates.
+## Components
 
-> If you don't require RTL support, you can safely update the 'RTL Updated Components' via the Shadcn CLI, as these changes are primarily for RTL compatibility. The 'Modified Components' may have other customizations to consider.
+All Shadcn UI components are standard and can be safely updated via the CLI:
 
-### Modified Components
-
-- scroll-area
-- sonner
-- separator
-
-### RTL Updated Components
-
-- alert-dialog
-- calendar
-- command
-- dialog
-- dropdown-menu
-- select
-- table
-- sheet
-- sidebar
-- switch
-
-**Notes:**
-
-- **Modified Components**: These have general updates, potentially including RTL adjustments.
-- **RTL Updated Components**: These have specific changes for RTL language support (e.g., layout, positioning).
-- For implementation details, check the source files in `src/components/ui/`.
-- All other Shadcn UI components in the project are standard and can be safely updated via the CLI.
-
-</details>
+```bash
+npx shadcn@latest add <component>
+```
 
 ## Tech Stack
 
@@ -68,50 +42,75 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 
 **Linting/Formatting:** [Eslint](https://eslint.org/) & [Prettier](https://prettier.io/)
 
-**Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
+**Icons:** [Lucide Icons](https://lucide.dev/icons/)
 
-**Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
+**Ready for Integration:**
+- **Backend:** [Convex](https://convex.dev) (Recommended)
+- **Auth:** [Better Auth](https://better-auth.com) (Recommended)
 
-## Run Locally
+## Quick Start
 
-Clone the project
-
-```bash
-  git clone https://github.com/satnaing/shadcn-admin.git
-```
-
-Go to the project directory
+### 1. Install Dependencies
 
 ```bash
-  cd shadcn-admin
+npm install
+# or
+pnpm install
 ```
 
-Install dependencies
+### 2. Start Development Server
 
 ```bash
-  pnpm install
+npm run dev
+# or
+pnpm dev
 ```
 
-Start the server
+Visit `http://localhost:5173`
+
+### 3. Build for Production
 
 ```bash
-  pnpm run dev
+npm run build
+# or
+pnpm build
 ```
 
-## Sponsoring this project ❤️
+## Next Steps: Add Backend & Auth
 
-If you find this project helpful or use this in your own work, consider [sponsoring me](https://github.com/sponsors/satnaing) to support development and maintenance. You can [buy me a coffee](https://buymeacoffee.com/satnaing) as well. Don’t worry, every penny helps. Thank you! 🙏
+Follow the integration guide at `plans/better-auth-convex-integration.md` to add:
+- **Convex** - Real-time backend with serverless functions
+- **Better Auth** - Self-hosted authentication
 
-For questions or sponsorship inquiries, feel free to reach out at [contact@satnaing.dev](mailto:contact@satnaing.dev).
+This will give you a complete full-stack application with:
+- ✅ Real-time database
+- ✅ Type-safe backend
+- ✅ Authentication (email/password, social providers)
+- ✅ User management
+- ✅ File storage
+- ✅ Scheduled functions
 
-### Current Sponsor
+## Project Structure
 
-- [Clerk](https://go.clerk.com/GttUAaK) - for backing the implementation of Clerk in this project
+```
+├── src/
+│   ├── components/     # UI components
+│   ├── features/       # Feature modules
+│   ├── routes/         # TanStack Router routes
+│   ├── hooks/          # Custom React hooks
+│   ├── context/        # React context providers
+│   ├── lib/            # Utility functions
+│   └── styles/         # Global styles
+├── plans/              # Integration guides
+│   ├── cleanup-plan.md
+│   └── better-auth-convex-integration.md
+└── public/             # Static assets
+```
 
-## Author
+## Credits
 
-Crafted with 🤍 by [@satnaing](https://github.com/satnaing)
+Original template: [Shadcn Admin](https://github.com/satnaing/shadcn-admin) by [@satnaing](https://github.com/satnaing)
 
 ## License
 
-Licensed under the [MIT License](https://choosealicense.com/licenses/mit/)
+MIT License
