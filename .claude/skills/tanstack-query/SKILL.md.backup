@@ -1,0 +1,142 @@
+---
+name: tanstack-query
+description: TanStack Query - Powerful data synchronization for React. Use for server state management, caching, background updates, mutations, and API data fetching.
+---
+
+# Tanstack-Query Skill
+
+Comprehensive assistance with tanstack-query development, generated from official documentation.
+
+## When to Use This Skill
+
+This skill should be triggered when:
+- Working with tanstack-query
+- Asking about tanstack-query features or APIs
+- Implementing tanstack-query solutions
+- Debugging tanstack-query code
+- Learning tanstack-query best practices
+
+## Quick Reference
+
+### Common Patterns
+
+**Pattern 1:** The library defaults to three retries with exponential backoff, which means that your tests are likely to timeout if you want to test an erroneous query. The easiest way to turn retries off is via the QueryClientProvider. Let's extend the above example:
+
+```
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // ✅ turns retries off
+      retry: false,
+    },
+  },
+})
+const wrapper = ({ children }) => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+)
+```
+
+**Pattern 2:** Runs persistQueryClientSave whenever the cache changes for your queryClient. For example: you might initiate the subscribe when a user logs-in and checks "Remember me".
+
+```
+persistQueryClientSubscribe({
+  queryClient,
+  persister,
+  buster = '',
+  dehydrateOptions = undefined,
+})
+```
+
+**Pattern 3:** Since query keys uniquely describe the data they are fetching, they should include any variables you use in your query function that change. For example:
+
+```
+function Todos({ todoId }) {
+  const result = useQuery({
+    queryKey: ['todos', todoId],
+    queryFn: () => fetchTodoById(todoId),
+  })
+}
+```
+
+**Pattern 4:** Example: An individual blog post query could pull "preview" data from a parent list of blog posts that only include title and a small snippet of the post body. You would not want to persist this partial data to the query result of the individual query, but it is useful for showing the content layout as quickly as possible while the actual query finishes to fetch the entire object.
+
+```
+function Todos() {
+  const result = useQuery({
+    queryKey: ['todos'],
+    queryFn: () => fetch('/todos'),
+    placeholderData: placeholderTodos,
+  })
+}
+```
+
+### Example Code Patterns
+
+**Example 1** (python):
+```python
+import { dehydrate } from '@tanstack/react-query'
+
+const dehydratedState = dehydrate(queryClient, {
+  shouldDehydrateQuery,
+  shouldDehydrateMutation,
+})
+```
+
+**Example 2** (python):
+```python
+import { dehydrate } from '@tanstack/react-query'
+
+const dehydratedState = dehydrate(queryClient, {
+  shouldDehydrateQuery,
+  shouldDehydrateMutation,
+})
+```
+
+## Reference Files
+
+This skill includes comprehensive documentation in `references/`:
+
+- **getting_started.md** - Getting Started documentation
+- **guide.md** - Guide documentation
+- **queries.md** - Queries documentation
+
+Use `view` to read specific reference files when detailed information is needed.
+
+## Working with This Skill
+
+### For Beginners
+Start with the getting_started or tutorials reference files for foundational concepts.
+
+### For Specific Features
+Use the appropriate category reference file (api, guides, etc.) for detailed information.
+
+### For Code Examples
+The quick reference section above contains common patterns extracted from the official docs.
+
+## Resources
+
+### references/
+Organized documentation extracted from official sources. These files contain:
+- Detailed explanations
+- Code examples with language annotations
+- Links to original documentation
+- Table of contents for quick navigation
+
+### scripts/
+Add helper scripts here for common automation tasks.
+
+### assets/
+Add templates, boilerplate, or example projects here.
+
+## Notes
+
+- This skill was automatically generated from official documentation
+- Reference files preserve the structure and examples from source docs
+- Code examples include language detection for better syntax highlighting
+- Quick reference patterns are extracted from common usage examples in the docs
+
+## Updating
+
+To refresh this skill with updated documentation:
+1. Re-run the scraper with the same configuration
+2. The skill will be rebuilt with the latest information

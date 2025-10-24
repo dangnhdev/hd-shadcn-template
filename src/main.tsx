@@ -11,9 +11,10 @@ import { Link, RouterProvider, createRouter } from '@tanstack/react-router'
 import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { ConvexQueryClient } from '@convex-dev/react-query'
 import { AuthQueryProvider } from '@daveyplate/better-auth-tanstack'
+import { AuthUIProvider } from '@daveyplate/better-auth-ui'
 import { AuthUIProviderTanstack } from '@daveyplate/better-auth-ui/tanstack'
 import { routerWithQueryClient } from '@tanstack/react-router-with-query'
-import { ConvexProvider, ConvexReactClient } from 'convex/react'
+import { ConvexReactClient } from 'convex/react'
 import { toast } from 'sonner'
 import { handleServerError } from '@/lib/handle-server-error'
 import { FontProvider } from './context/font-provider'
@@ -119,7 +120,7 @@ if (!rootElement.innerHTML) {
         <QueryClientProvider client={queryClient}>
           <AuthQueryProvider>
             <ThemeProvider>
-              <AuthUIProviderTanstack
+              <AuthUIProvider
                 emailOTP={true}
                 credentials={false}
                 signUp={false}
@@ -134,7 +135,7 @@ if (!rootElement.innerHTML) {
                 <FontProvider>
                   <RouterProvider router={router} />
                 </FontProvider>
-              </AuthUIProviderTanstack>
+              </AuthUIProvider>
             </ThemeProvider>
           </AuthQueryProvider>
         </QueryClientProvider>
