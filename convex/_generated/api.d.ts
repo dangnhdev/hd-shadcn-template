@@ -9,7 +9,14 @@
  */
 
 import type * as auth from "../auth.js";
+import type * as email from "../email.js";
+import type * as emails_components_BaseEmail from "../emails/components/BaseEmail.js";
+import type * as emails_magicLink from "../emails/magicLink.js";
+import type * as emails_resetPassword from "../emails/resetPassword.js";
+import type * as emails_verifyEmail from "../emails/verifyEmail.js";
+import type * as emails_verifyOTP from "../emails/verifyOTP.js";
 import type * as emails from "../emails.js";
+import type * as http from "../http.js";
 import type * as users from "../users.js";
 
 import type {
@@ -28,7 +35,14 @@ import type {
  */
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
+  email: typeof email;
+  "emails/components/BaseEmail": typeof emails_components_BaseEmail;
+  "emails/magicLink": typeof emails_magicLink;
+  "emails/resetPassword": typeof emails_resetPassword;
+  "emails/verifyEmail": typeof emails_verifyEmail;
+  "emails/verifyOTP": typeof emails_verifyOTP;
   emails: typeof emails;
+  http: typeof http;
   users: typeof users;
 }>;
 declare const fullApiWithMounts: typeof fullApi;

@@ -5,22 +5,39 @@ import {
   QueryCache,
   QueryClient,
   QueryClientProvider,
+  notifyManager,
 } from '@tanstack/react-query'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { Link, RouterProvider, createRouter } from '@tanstack/react-router'
+import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
+import { ConvexQueryClient } from '@convex-dev/react-query'
+import { AuthQueryProvider } from '@daveyplate/better-auth-tanstack'
+import { AuthUIProviderTanstack } from '@daveyplate/better-auth-ui/tanstack'
+import { routerWithQueryClient } from '@tanstack/react-router-with-query'
+import { ConvexProvider, ConvexReactClient } from 'convex/react'
 import { toast } from 'sonner'
-import { useAuthStore } from '@/stores/auth-store'
 import { handleServerError } from '@/lib/handle-server-error'
-import { ConvexProvider } from './context/convex-provider'
 import { FontProvider } from './context/font-provider'
 import { ThemeProvider } from './context/theme-provider'
+import { authClient } from './lib/auth-client'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 // Styles
 import './styles/index.css'
 
+if (typeof document !== 'undefined') {
+  notifyManager.setScheduler(window.requestAnimationFrame)
+}
+const convex = new ConvexReactClient(
+  import.meta.env.VITE_CONVEX_URL as string,
+  { expectAuth: true }
+)
+const convexQueryClient = new ConvexQueryClient(convex)
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      queryKeyHashFn: convexQueryClient.hashFn(),
+      queryFn: convexQueryClient.queryFn(),
       retry: (failureCount, error) => {
         // eslint-disable-next-line no-console
         if (import.meta.env.DEV) console.log({ failureCount, error })
@@ -53,9 +70,7 @@ const queryClient = new QueryClient({
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
           toast.error('Session expired!')
-          useAuthStore.getState().auth.reset()
-          const redirect = `${router.history.location.href}`
-          router.navigate({ to: '/sign-in', search: { redirect } })
+          router.navigate({ to: '/auth/sign-in', replace: true })
         }
         if (error.response?.status === 500) {
           toast.error('Internal Server Error!')
@@ -69,18 +84,28 @@ const queryClient = new QueryClient({
   }),
 })
 
+convexQueryClient.connect(queryClient)
+
 // Create a new router instance
-const router = createRouter({
-  routeTree,
-  context: { queryClient },
-  defaultPreload: 'intent',
-  defaultPreloadStaleTime: 0,
-})
+const router = routerWithQueryClient(
+  createRouter({
+    routeTree,
+    defaultPreload: 'intent',
+    defaultPreloadStaleTime: 0,
+    context: { queryClient },
+    Wrap: ({ children }) => (
+      <ConvexProvider client={convexQueryClient.convexClient}>
+        {children}
+      </ConvexProvider>
+    ),
+  }),
+  queryClient
+)
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
   interface Register {
-    router: typeof router
+    router: typeof createRouter
   }
 }
 
@@ -90,14 +115,27 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <ConvexProvider>
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider>
-            <FontProvider>
-              <RouterProvider router={router} />
-            </FontProvider>
-          </ThemeProvider>
-        </QueryClientProvider>
+      <ConvexProvider client={convex}>
+        <ConvexBetterAuthProvider client={convex} authClient={authClient}>
+          <QueryClientProvider client={queryClient}>
+            <AuthQueryProvider>
+              <ThemeProvider>
+                <AuthUIProviderTanstack
+                  persistClient={false}
+                  authClient={authClient}
+                  //onSessionChange={() => router.refresh()}
+                  navigate={(href) => router.navigate({ href })}
+                  replace={(href) => router.navigate({ href, replace: true })}
+                  Link={({ href, ...props }) => <Link to={href} {...props} />}
+                >
+                  <FontProvider>
+                    <RouterProvider router={router} />
+                  </FontProvider>
+                </AuthUIProviderTanstack>
+              </ThemeProvider>
+            </AuthQueryProvider>
+          </QueryClientProvider>
+        </ConvexBetterAuthProvider>
       </ConvexProvider>
     </StrictMode>
   )

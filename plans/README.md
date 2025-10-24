@@ -4,130 +4,85 @@ This directory contains detailed implementation plans for the HD Shadcn Template
 
 ## Available Plans
 
-### 1. Convex Integration ✅ COMPLETED
-**File**: `convex-integration-summary.md`
+### 1. Convex Integration ✅ COMPLETED (ARCHIVED)
+**File**: `archive/convex-integration-summary.md`
 
-**Status**: Fully implemented and tested
+**Status**: Fully implemented (commit f940ca1)
 
-**Summary**:
-- Integrated Convex real-time backend
-- Created ConvexProvider with client configuration
-- Set up example schema and functions
-- Tested TypeScript compilation and build
+**Summary**: Convex real-time backend integrated, provider configured, schema + functions created
 
 ---
 
-### 2. Convex Resend Setup 📧 DO THIS FIRST
-**File**: `convex-resend-setup.md`
+### 2. Convex Resend Setup ✅ COMPLETED (DELETED)
+**Status**: Implemented (commit bb2757d, ee83b6c)
 
-**Status**: Ready to implement (prerequisite for Better Auth)
-
-**Summary**:
-- Official `@convex-dev/resend` component integration
-- Email sending with queueing, retries, and rate limiting
-- React Email template support
-- Webhook integration for delivery tracking
-- Production-ready email infrastructure
-
-**Why First?**
-- ✅ Required for Better Auth magic link
-- ✅ Test email delivery independently
-- ✅ Set up domain verification
-- ✅ Configure webhooks for monitoring
-
-**Time to Implement**: ~30 minutes
+**Summary**: Resend component configured, email templates created, tested successfully
 
 ---
 
-### 3. Better Auth + Convex (Magic Link Only) 🎯 RECOMMENDED
-**File**: `better-auth-magic-link-plan.md`
+### 3. Better Auth Backend (Phase 0-1) ✅ COMPLETED (ARCHIVED)
+**File**: `archive/better-auth-otp-phase1-summary.md`
 
-**Status**: Ready for implementation
+**Status**: Backend fully implemented (commit ee83b6c)
 
 **Summary**:
-- **Passwordless authentication** using magic links
-- **Resend** for email delivery
-- **Better Auth UI** for pre-built, shadcn-styled components
-- **Convex** for session and user storage
-- **Type-safe** end-to-end with full TypeScript support
-
-**Tech Stack**:
-```
-Frontend: React + Vite + TanStack Router
-Backend: Convex (serverless + real-time)
-Auth: Better Auth (magic-link only)
-UI: Better Auth UI (@daveyplate/better-auth-ui)
-Email: Resend
-```
-
-**Time to Implement**: ~2-3 hours
-
-**Why This Plan?**
-- ✅ **Fastest setup**: Use `<SignIn />` component instead of building custom UI
-- ✅ **Best UX**: Passwordless, no forms to manage
-- ✅ **Production-ready**: Pre-built, tested components
-- ✅ **Free tier**: 3,000 emails/month with Resend
-- ✅ **Shadcn-styled**: Matches existing design system
-
-**Key Components**:
-- `<SignIn />` - Complete sign-in page (10 lines of code!)
-- `<UserButton />` - User profile dropdown
-- `<SignedIn>` / `<SignedOut>` - Conditional rendering
-- `<ProtectedRoute>` - Route protection
+- Better Auth v1.3.29 + Email OTP plugin configured
+- Convex integration with @convex-dev/better-auth
+- HTTP routes at `/api/auth`
+- React Email templates (verify, magic-link, reset, OTP)
+- Resend integration working
 
 ---
 
-### 3. Better Auth + Convex (Full Features)
-**File**: `better-auth-convex-integration.md`
+### 4. Better Auth Client (Phase 2-5) ⏳ IN PROGRESS
+**File**: `251024-better-auth-client-implementation.md`
 
-**Status**: Reference only (includes email/password, social providers, 2FA)
+**Status**: Next to implement
 
-**Summary**:
-- Complete Better Auth integration with all features
-- Email/password authentication
-- Social providers (GitHub, Google)
-- 2FA, passkeys, magic links
-- More complex setup
+**Decisions**:
+- ✅ Use Better Auth UI components (@daveyplate/better-auth-ui v3.2.6)
+- ✅ Implement client first (Phase 2-3)
+- ✅ Testing later (Phase 4)
 
-**Use this if**: You need full authentication features beyond magic link
+**Remaining Work**:
+- Phase 2: Client setup (`src/lib/auth-client.ts`, providers)
+- Phase 3: UI components (`<SignIn />`, `<UserButton />`, protected routes)
+- Phase 4: End-to-end testing
+- Phase 5: Production deployment
+
+**Time to Implement**: ~2 hours
 
 ---
 
-## Quick Start: Magic Link Implementation
+### 5. Better Auth Reference Plans
+**Files**: `better-auth-magic-link-plan.md`, `better-auth-convex-integration.md`
 
-### Prerequisites
-- [x] Convex already installed and configured
-- [ ] Resend account (https://resend.com)
-- [ ] `@convex-dev/resend` component set up (see `convex-resend-setup.md`)
-- [ ] 2-3 hours for implementation
+**Status**: Reference only
 
-### Installation
-```bash
-# First: Set up Convex Resend (see convex-resend-setup.md)
-bun add @convex-dev/resend
+**Use**: Detailed implementation steps and full feature reference
 
-# Then: Install Better Auth packages
-bun add better-auth @daveyplate/better-auth-ui
+---
 
-# Optional: React Email for templates
-bun add react-email @react-email/components
-```
+## Implementation Status
 
-### Implementation Steps
-1. **Phase 0**: Set up Convex Resend component (30 min) - **See `convex-resend-setup.md`**
-2. **Phase 1**: Configure Better Auth with magic link (30 min)
-3. **Phase 2**: Set up Better Auth client + providers (30 min)
-4. **Phase 3**: Add Better Auth UI components (45 min)
-5. **Phase 4**: Test magic link flow (30 min)
-6. **Phase 5**: Optional React Email templates (30 min)
+### Completed ✅
+- [x] Convex integration (f940ca1)
+- [x] Resend email setup (bb2757d)
+- [x] Better Auth backend (ee83b6c)
+- [x] Email OTP plugin configured
+- [x] React Email templates
 
-### Expected Results
-- ✅ Working magic link authentication
-- ✅ User profile dropdown with avatar
-- ✅ Protected routes
-- ✅ Session persistence
-- ✅ Sign in/out functionality
-- ✅ Responsive, dark-mode-ready UI
+### In Progress ⏳
+- [ ] Better Auth client setup (Phase 2)
+- [ ] Better Auth UI components (Phase 3)
+- [ ] End-to-end testing (Phase 4)
+- [ ] Production deployment (Phase 5)
+
+### Next Steps
+1. Read `251024-better-auth-client-implementation.md`
+2. Implement client-side auth
+3. Integrate Better Auth UI components
+4. Test and deploy
 
 ---
 

@@ -35,3 +35,4 @@ We keep all important docs in `./docs` folder and keep updating them, structure 
 ├── system-architecture.md
 └── project-roadmap.md
 ```
+- this project use pnpm
