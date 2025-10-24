@@ -5,6 +5,9 @@ import {
 import { emailOTPClient } from 'better-auth/client/plugins'
 import { createAuthClient } from 'better-auth/react'
 
+const baseURL = import.meta.env.VITE_CONVEX_SITE_URL!
+console.log(baseURL)
+
 export const authClient = createAuthClient({
   baseURL: import.meta.env.VITE_CONVEX_SITE_URL,
   plugins: [emailOTPClient(), crossDomainClient(), convexClient()],

@@ -29,7 +29,7 @@ if (typeof document !== 'undefined') {
 }
 const convex = new ConvexReactClient(
   import.meta.env.VITE_CONVEX_URL as string,
-  { expectAuth: true }
+  { expectAuth: false }
 )
 const convexQueryClient = new ConvexQueryClient(convex)
 
@@ -93,11 +93,11 @@ const router = routerWithQueryClient(
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
     context: { queryClient },
-    Wrap: ({ children }) => (
-      <ConvexProvider client={convexQueryClient.convexClient}>
-        {children}
-      </ConvexProvider>
-    ),
+    // Wrap: ({ children }) => (
+    //   <ConvexProvider client={convexQueryClient.convexClient}>
+    //     {children}
+    //   </ConvexProvider>
+    // ),
   }),
   queryClient
 )
@@ -115,28 +115,28 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <ConvexProvider client={convex}>
-        <ConvexBetterAuthProvider client={convex} authClient={authClient}>
-          <QueryClientProvider client={queryClient}>
-            <AuthQueryProvider>
-              <ThemeProvider>
-                <AuthUIProviderTanstack
-                  persistClient={false}
-                  authClient={authClient}
-                  //onSessionChange={() => router.refresh()}
-                  navigate={(href) => router.navigate({ href })}
-                  replace={(href) => router.navigate({ href, replace: true })}
-                  Link={({ href, ...props }) => <Link to={href} {...props} />}
-                >
-                  <FontProvider>
-                    <RouterProvider router={router} />
-                  </FontProvider>
-                </AuthUIProviderTanstack>
-              </ThemeProvider>
-            </AuthQueryProvider>
-          </QueryClientProvider>
-        </ConvexBetterAuthProvider>
-      </ConvexProvider>
+      <ConvexBetterAuthProvider client={convex} authClient={authClient}>
+        <QueryClientProvider client={queryClient}>
+          <AuthQueryProvider>
+            <ThemeProvider>
+              <AuthUIProviderTanstack
+                emailOTP={true}
+                signUp={true}
+                persistClient={false}
+                authClient={authClient}
+                //onSessionChange={() => router.refresh()}
+                navigate={(href) => router.navigate({ href })}
+                replace={(href) => router.navigate({ href, replace: true })}
+                Link={({ href, ...props }) => <Link to={href} {...props} />}
+              >
+                <FontProvider>
+                  <RouterProvider router={router} />
+                </FontProvider>
+              </AuthUIProviderTanstack>
+            </ThemeProvider>
+          </AuthQueryProvider>
+        </QueryClientProvider>
+      </ConvexBetterAuthProvider>
     </StrictMode>
   )
 }

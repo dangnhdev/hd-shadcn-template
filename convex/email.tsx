@@ -1,3 +1,5 @@
+"use node";
+
 import "./polyfills";
 import VerifyEmail from "./emails/verifyEmail";
 import MagicLinkEmail from "./emails/magicLink";

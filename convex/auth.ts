@@ -9,6 +9,7 @@ import { type DataModel } from "./_generated/dataModel";
 import { sendOTPVerification } from "./email";
 
 const siteUrl = process.env.SITE_URL!;
+console.warn("site url", siteUrl);
 
 // The component client has methods needed for integrating Convex with Better Auth
 export const authComponent = createClient<DataModel>(components.betterAuth);
@@ -41,6 +42,7 @@ export const createAuth = (
             code: otp,
           });
         },
+      
         // OTP configuration
         otpLength: 6,
         expiresIn: 300, // 5 minutes
@@ -48,6 +50,11 @@ export const createAuth = (
         storeOTP: "plain", // Store as plain text (can use 'hashed' or 'encrypted' for better security)
       }),
     ],
+    account: {
+      accountLinking: {
+        enabled: true,
+      },
+    },
   });
 };
 
