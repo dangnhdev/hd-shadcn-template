@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**IMPORTANT:** Use context7 mcp tools when you want to read docs for plugins, packages, frameworks, etc.
-**IMPORTANT:** This project use **bun** as package manager
+**IMPORTANT:** Prefer looking for SKILLs when you want to reads docs for library, packages, frameworks, etc. If skills dont have library docs, use askquestion tool and ask users to add it.
+**IMPORTANT:** This project use **pnpm** as package manager
 
 ## Role & Responsibilities
 
@@ -35,4 +35,3 @@ We keep all important docs in `./docs` folder and keep updating them, structure 
 ├── system-architecture.md
 └── project-roadmap.md
 ```
-- this project use pnpm
