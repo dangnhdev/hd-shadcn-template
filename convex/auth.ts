@@ -41,6 +41,7 @@ export const createAuth = (
             to: email,
             code: otp,
           });
+
         },
       
         // OTP configuration

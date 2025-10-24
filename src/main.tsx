@@ -121,8 +121,10 @@ if (!rootElement.innerHTML) {
             <ThemeProvider>
               <AuthUIProviderTanstack
                 emailOTP={true}
-                signUp={true}
+                credentials={false}
+                signUp={false}
                 persistClient={false}
+                redirectTo='/'
                 authClient={authClient}
                 //onSessionChange={() => router.refresh()}
                 navigate={(href) => router.navigate({ href })}
