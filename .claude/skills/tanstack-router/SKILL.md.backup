@@ -1,0 +1,159 @@
+---
+name: tanstack-router
+description: TanStack Router - Type-safe routing for React applications. Use for client-side routing, route-based code splitting, nested routes, and type-safe navigation.
+---
+
+# Tanstack-Router Skill
+
+Comprehensive assistance with tanstack-router development, generated from official documentation.
+
+## When to Use This Skill
+
+This skill should be triggered when:
+- Working with tanstack-router
+- Asking about tanstack-router features or APIs
+- Implementing tanstack-router solutions
+- Debugging tanstack-router code
+- Learning tanstack-router best practices
+
+## Quick Reference
+
+### Common Patterns
+
+**Pattern 1:** The select function can perform various calculations on the router state, allowing you to return different types of values, such as objects. For example:
+
+```
+const result = Route.useSearch({
+  select: (search) => {
+    return {
+      foo: search.foo,
+      hello: `hello ${search.foo}`,
+    }
+  },
+})
+```
+
+**Pattern 2:** Example usage:
+
+```
+const router = createRouter({
+  // ...
+  pathParamsAllowedCharacters: ['@'],
+})
+```
+
+**Pattern 3:** For example:
+
+```
+import { createRouter } from '@tanstack/react-router'
+
+const router = createRouter({
+  // ...
+  defaultPreloadStaleTime: 0,
+})
+```
+
+**Pattern 4:** Here's an example:
+
+```
+const link = (
+  <Link
+    to="/blog/post/$postId"
+    params={{
+      postId: 'my-first-blog-post',
+    }}
+    activeProps={{
+      style: {
+        fontWeight: 'bold',
+      },
+    }}
+  >
+    Section 1
+  </Link>
+)
+```
+
+**Pattern 5:** The Link component supports automatically preloading routes on intent (hovering or touchstart for now). This can be configured as a default in the router options (which we'll talk more about soon) or by passing a preload='intent' prop to the Link component. Here's an example:
+
+```
+const link = (
+  <Link to="/blog/post/$postId" preload="intent">
+    Blog Post
+  </Link>
+)
+```
+
+**Pattern 6:** Example: If you want to configure to remount a route component upon params change, use:
+
+```
+remountDeps: ({ params }) => params
+```
+
+**Pattern 7:** The router context is passed down the route tree and is merged at each route. This means that you can modify the context at each route and the modifications will be available to all child routes. Here's an example:
+
+```
+import { createRootRouteWithContext } from '@tanstack/react-router'
+
+interface MyRouterContext {
+  foo: boolean
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
+  component: App,
+})
+```
+
+**Pattern 8:** Usage:
+
+```
+tsr watch
+```
+
+## Reference Files
+
+This skill includes comprehensive documentation in `references/`:
+
+- **getting_started.md** - Getting Started documentation
+- **guide.md** - Guide documentation
+- **routing.md** - Routing documentation
+
+Use `view` to read specific reference files when detailed information is needed.
+
+## Working with This Skill
+
+### For Beginners
+Start with the getting_started or tutorials reference files for foundational concepts.
+
+### For Specific Features
+Use the appropriate category reference file (api, guides, etc.) for detailed information.
+
+### For Code Examples
+The quick reference section above contains common patterns extracted from the official docs.
+
+## Resources
+
+### references/
+Organized documentation extracted from official sources. These files contain:
+- Detailed explanations
+- Code examples with language annotations
+- Links to original documentation
+- Table of contents for quick navigation
+
+### scripts/
+Add helper scripts here for common automation tasks.
+
+### assets/
+Add templates, boilerplate, or example projects here.
+
+## Notes
+
+- This skill was automatically generated from official documentation
+- Reference files preserve the structure and examples from source docs
+- Code examples include language detection for better syntax highlighting
+- Quick reference patterns are extracted from common usage examples in the docs
+
+## Updating
+
+To refresh this skill with updated documentation:
+1. Re-run the scraper with the same configuration
+2. The skill will be rebuilt with the latest information

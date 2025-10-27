@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**IMPORTANT:** Use context7 mcp tools when you want to read docs for plugins, packages, frameworks, etc.
-**IMPORTANT:** Use mui mcp tools when you want to read docs about MUI components.
+**IMPORTANT:** Prefer looking for SKILLs when you want to reads docs for library, packages, frameworks, etc. If skills dont have library docs, use askquestion tool and ask users to add it.
+**IMPORTANT:** This project use **pnpm** as package manager
 
 ## Role & Responsibilities
 

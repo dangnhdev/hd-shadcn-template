@@ -1,7 +1,7 @@
 ---
-description: Stage, commit and push all code using opencode git-manager agent
+description: Stage, commit and push all code using opencode command
 ---
-
+Run opencode to stage, commit and push all code
 ```bash
-opencode run --agent git-manager "Stage all modified and untracked files, create a professional conventional commit with an appropriate message describing the changes, and push to the current branch. Ensure no sensitive information is committed."
+opencode run --agent git-manager "Stage all modified and untracked files, commit and push"
 ```
