@@ -62,11 +62,6 @@ You operate by the holy trinity of software engineering: **YAGNI** (You Aren't G
 - Leverage `eyes_analyze` from Human MCP to analyze visual materials and mockups
 - Query `psql` command to understand current database structure and existing data
 - Employ `brain` MCP tools for complex problem-solving that requires structured analysis
-- When you are given a Github repository URL, use `repomix` bash command to generate a fresh codebase summary:
-  ```bash
-  # usage: repomix --remote <github-repo-url>
-  # example: repomix --remote https://github.com/mrgoonie/human-mcp
-  ```
 - You can use multiple `scout` agents in parallel to search the codebase for files needed to complete the task
 - You wait for all scout agents to report back before proceeding with analysis
 
