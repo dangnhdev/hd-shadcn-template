@@ -1,15 +1,7 @@
 import { type SVGProps } from 'react'
 import { Root as Radio, Item } from '@radix-ui/react-radio-group'
 import { CircleCheck, RotateCcw, Settings } from 'lucide-react'
-import { IconLayoutCompact } from '@/assets/custom/icon-layout-compact'
-import { IconLayoutDefault } from '@/assets/custom/icon-layout-default'
-import { IconLayoutFull } from '@/assets/custom/icon-layout-full'
-import { IconSidebarFloating } from '@/assets/custom/icon-sidebar-floating'
-import { IconSidebarInset } from '@/assets/custom/icon-sidebar-inset'
-import { IconSidebarSidebar } from '@/assets/custom/icon-sidebar-sidebar'
-import { IconThemeDark } from '@/assets/custom/icon-theme-dark'
-import { IconThemeLight } from '@/assets/custom/icon-theme-light'
-import { IconThemeSystem } from '@/assets/custom/icon-theme-system'
+import { Icon } from '@iconify/react'
 import { cn } from '@/lib/utils'
 import { type Collapsible, useLayout } from '@/context/layout-provider'
 import { useTheme } from '@/context/theme-provider'
@@ -115,7 +107,7 @@ function RadioGroupItem({
   item: {
     value: string
     label: string
-    icon: (props: SVGProps<SVGSVGElement>) => React.ReactElement
+    icon: string | ((props: SVGProps<SVGSVGElement>) => React.ReactElement)
   }
   isTheme?: boolean
 }) {
@@ -144,13 +136,25 @@ function RadioGroupItem({
           )}
           aria-hidden='true'
         />
-        <item.icon
-          className={cn(
-            !isTheme &&
-              'stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground'
-          )}
-          aria-hidden='true'
-        />
+        {typeof item.icon === 'string' ? (
+          <Icon
+            icon={item.icon}
+            className={cn(
+              'h-auto w-full',
+              !isTheme &&
+                'stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground'
+            )}
+            aria-hidden='true'
+          />
+        ) : (
+          <item.icon
+            className={cn(
+              !isTheme &&
+                'stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground'
+            )}
+            aria-hidden='true'
+          />
+        )}
       </div>
       <div
         className='mt-1 text-xs'
@@ -183,17 +187,17 @@ function ThemeConfig() {
           {
             value: 'system',
             label: 'System',
-            icon: IconThemeSystem,
+            icon: 'lucide:monitor',
           },
           {
             value: 'light',
             label: 'Light',
-            icon: IconThemeLight,
+            icon: 'lucide:sun',
           },
           {
             value: 'dark',
             label: 'Dark',
-            icon: IconThemeDark,
+            icon: 'lucide:moon',
           },
         ].map((item) => (
           <RadioGroupItem key={item.value} item={item} isTheme />
@@ -226,17 +230,17 @@ function SidebarConfig() {
           {
             value: 'inset',
             label: 'Inset',
-            icon: IconSidebarInset,
+            icon: 'lucide:panel-left',
           },
           {
             value: 'floating',
             label: 'Floating',
-            icon: IconSidebarFloating,
+            icon: 'lucide:square-dashed-bottom-code',
           },
           {
             value: 'sidebar',
             label: 'Sidebar',
-            icon: IconSidebarSidebar,
+            icon: 'lucide:sidebar',
           },
         ].map((item) => (
           <RadioGroupItem key={item.value} item={item} />
@@ -283,17 +287,17 @@ function LayoutConfig() {
           {
             value: 'default',
             label: 'Default',
-            icon: IconLayoutDefault,
+            icon: 'lucide:layout-dashboard',
           },
           {
             value: 'icon',
             label: 'Compact',
-            icon: IconLayoutCompact,
+            icon: 'lucide:layout-grid',
           },
           {
             value: 'offcanvas',
             label: 'Full layout',
-            icon: IconLayoutFull,
+            icon: 'lucide:layout-template',
           },
         ].map((item) => (
           <RadioGroupItem key={item.value} item={item} />

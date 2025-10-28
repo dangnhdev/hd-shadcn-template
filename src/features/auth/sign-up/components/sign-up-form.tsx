@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconFacebook, IconGithub } from '@/assets/brand-icons'
+import { Icon } from '@iconify/react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -126,7 +126,7 @@ export function SignUpForm({
             type='button'
             disabled={isLoading}
           >
-            <IconGithub className='h-4 w-4' /> GitHub
+            <Icon icon='mdi:github' className='h-4 w-4' /> GitHub
           </Button>
           <Button
             variant='outline'
@@ -134,7 +134,7 @@ export function SignUpForm({
             type='button'
             disabled={isLoading}
           >
-            <IconFacebook className='h-4 w-4' /> Facebook
+            <Icon icon='mdi:facebook' className='h-4 w-4' /> Facebook
           </Button>
         </div>
       </form>
